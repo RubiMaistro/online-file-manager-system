@@ -24,10 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $files = Files::all();
-
-        return view('home', [
-            'files' => $files
-        ]);
+        return view('home');
     }
 }
