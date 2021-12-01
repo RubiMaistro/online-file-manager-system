@@ -26,17 +26,11 @@ class FileController extends Controller
      */
     public function index()
     {
-        $files = Files::all();
-
-        $error = null;
-        if(is_null($files))
-        {
-            $error = "Még nem adtál hozzá fájlt";
-        }
+        $userID = auth()->user()->id;
+        $files = Files::where('user_id', '=', $userID)->sortable()->paginate(5);
 
         return view('home', [
-            'files' => $files,
-            'error' => $error
+            'files' => $files
         ]);
     }
 
@@ -66,12 +60,18 @@ class FileController extends Controller
 
         if($request->hasFile('file'))
         {
-            $destination_path = 'public/files';
+            $userName = auth()->user()->name;
+            $destination_path = 'public/'. $userName;
 
             $file->user_id = auth()->user()->id;
             $file->name = $request->name;
             $file->filename = $request->file('file')->getClientOriginalName();
             $file->size = floatval($request->file('file')->getSize() / (1024*1024)); // size in MB
+            if($file->size == 0)
+            {
+                $file->size = floatval(0.01);
+            }
+            
             $file->save();
 
             $request->file('file')->storeAs($destination_path, $file->filename);
