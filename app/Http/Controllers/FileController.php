@@ -27,7 +27,7 @@ class FileController extends Controller
     public function index()
     {
         $userID = auth()->user()->id;
-        $files = Files::where('user_id', '=', $userID)->sortable()->paginate(5);
+        $files = Files::where('user_id', '=', $userID)->sortable()->paginate(20);
 
         return view('home', [
             'files' => $files
@@ -67,10 +67,6 @@ class FileController extends Controller
             $file->name = $request->name;
             $file->filename = $request->file('file')->getClientOriginalName();
             $file->size = floatval($request->file('file')->getSize() / (1024*1024)); // size in MB
-            if($file->size == 0)
-            {
-                $file->size = floatval(0.01);
-            }
             
             $file->save();
 

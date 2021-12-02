@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="column justify-content-center">
-        <div class="row justify-content-end">
+        <div class="row justify-content-center mb-4">
             <div class="row">
                 <div class="mr-2">
                     <label for="search-file"></label>
@@ -34,8 +34,8 @@
                 </div>
             </div>
         </div>
-        <div>
-            <table class="table table-hover">
+        <div class="row justify-content-center">
+            <table class="table table-light table-hover">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -54,7 +54,11 @@
                     <th scope="row">{{ $id }}</th>
                     <td>{{ $file->name }}</td>
                     <td>{{ $file->filename }}</td>
-                    <td>{{ $file->size }} MB</td>
+                    <td>@if ($file->size == 0)
+                        < 0.01
+                        @else
+                        {{ $file->size }}
+                    @endif MB</td>
                     <td>{{ $file->created_at }}</td>
                     <td>{{ $file->updated_at }}</td>
                     <td class="row">
