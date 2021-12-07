@@ -17,7 +17,7 @@
                     <label for="search-file"></label>
                 </div>
                 <div class="mr-2">
-                    <input id="search-file" type="text" class="form-control mr-2" name="search_file" placeholder="Write something here and search" style="width: 300px;" required>
+                    <input id="search-file" type="text" class="form-control mr-2" name="search_file" placeholder="Write something here and search..." style="width: 300px;" required>
                 </div>
                 <div class="mr-2">
                     <form method="post" action="{{ url('/file/search/') }}">
@@ -26,11 +26,16 @@
                             <button class="btn btn-success" type="submit">Search</button>
                     </form>
                 </div>  
-                <div class="mr-2">
-                    <a href="/file/add" class="btn btn-dark">Add file</a>
-                </div>
-                <div class="mr-2">
-                    <a href="/file/create/text" class="btn btn-dark">Create text file</a>
+                <div class="column justify-content-center ml-4">
+                    <div class="mb-2">
+                        <a href="/file/add" class="btn btn-dark">Add file</a>
+                    </div>
+                    <div class="mb-2">
+                        <a href="/file/create/text" class="btn btn-dark">Create text file</a>
+                    </div>
+                    <div class="mb-2">
+                        <a href="/file/send" class="btn btn-dark">Send File</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,7 +67,7 @@
                     <td>{{ $file->created_at }}</td>
                     <td>{{ $file->updated_at }}</td>
                     <td class="row">
-                        <a href="#" class="btn btn-primary mr-2">Edit</a>
+                        <a href="/file/edit/{{ $file->id }}" class="btn btn-primary mr-2">Edit</a>
                         <form method="post" action="{{ url('/file/delete/'.$file->id) }}">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}

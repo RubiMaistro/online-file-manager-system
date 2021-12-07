@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Files') }}</div>
-                <div class="card-body">
+                <div class="card-header" style="font-size: x-large; text-align: center">{{ __('Add Files') }}</div>
+                <div class="card-body" style="font-size: large;">
                     <form method="POST" action="{{ url('/file/add') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">

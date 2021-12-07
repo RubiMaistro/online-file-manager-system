@@ -88,7 +88,7 @@ class FileController extends Controller
         }
         $file->delete();
 
-        Storage::delete('public/'.auth()->user()->name.'/'.$file->filename);;
+        Storage::delete('public/'.auth()->user()->name.'/'.$file->filename);
         session()->flash('message', 'Delete successful.');
 
         return redirect()->back();
