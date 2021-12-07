@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
 
 class FileController extends Controller
@@ -86,6 +87,8 @@ class FileController extends Controller
             return response()->json(['message' => 'File not found'], 404);
         }
         $file->delete();
+
+        Storage::delete('public/'.auth()->user()->name.'/'.$file->filename);;
         session()->flash('message', 'Delete successful.');
 
         return redirect()->back();
