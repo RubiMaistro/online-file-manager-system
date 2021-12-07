@@ -26,3 +26,9 @@ Route::delete('/file/delete/{id}', [App\Http\Controllers\FileController::class, 
 Route::get('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'viewCreateTextFileSurface'])->middleware('auth');
 Route::post('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'createTextFile'])->middleware('auth');
 
+Route::get('/file/send', [App\Http\Controllers\SendFileController::class, 'viewSendFileSurface'])->middleware('auth');
+Route::post('/file/send/{name}', [App\Http\Controllers\SendFileController::class, 'sendFile'])->middleware('auth');
+
+Route::get('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'viewEditFileSurface'])->middleware('auth');
+Route::post('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'editFile'])->middleware('auth');
+
