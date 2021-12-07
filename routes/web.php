@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\FileController::class, 'index'])->name('home');
+
 Route::get('/file/add', [App\Http\Controllers\FileController::class, 'viewAddFileSurface'])->middleware('auth');
 Route::post('/file/add', [App\Http\Controllers\FileController::class, 'storeFile'])->middleware('auth');
+
 Route::delete('/file/delete/{id}', [App\Http\Controllers\FileController::class, 'deleteFile'])->middleware('auth');
 
+Route::get('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'viewCreateTextFileSurface'])->middleware('auth');
+Route::post('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'createTextFile'])->middleware('auth');
 

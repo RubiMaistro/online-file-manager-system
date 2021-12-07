@@ -17,7 +17,7 @@
                     <label for="search-file"></label>
                 </div>
                 <div class="mr-2">
-                    <input id="search-file" type="text" class="form-control mr-2" name="search_file" required>
+                    <input id="search-file" type="text" class="form-control mr-2" name="search_file" placeholder="Write something here and search" style="width: 300px;" required>
                 </div>
                 <div class="mr-2">
                     <form method="post" action="{{ url('/file/search/') }}">
@@ -30,7 +30,7 @@
                     <a href="/file/add" class="btn btn-dark">Add file</a>
                 </div>
                 <div class="mr-2">
-                    <a href="#" class="btn btn-dark">Create text</a>
+                    <a href="/file/create/text" class="btn btn-dark">Create text file</a>
                 </div>
             </div>
         </div>
