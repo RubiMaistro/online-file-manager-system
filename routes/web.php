@@ -32,3 +32,7 @@ Route::post('/file/send/{name}', [App\Http\Controllers\SendFileController::class
 Route::get('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'viewEditFileSurface'])->middleware('auth');
 Route::post('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'editFile'])->middleware('auth');
 
+Route::get('user/change/username', [App\Http\Controllers\UserController::class, 'viewUsernameChangerSurface'])->middleware('auth');
+Route::get('user/change/password', [App\Http\Controllers\UserController::class, 'viewPasswordChangerSurface'])->middleware('auth');
+Route::post('user/change/username', [App\Http\Controllers\UserController::class, 'usernameChange'])->middleware('auth');
+Route::post('user/change/password', [App\Http\Controllers\UserController::class, 'passwordChange'])->middleware('auth');
