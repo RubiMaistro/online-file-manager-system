@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header" style="font-size: x-large; text-align: center">{{ __('Change Password') }}</div>
                 <div class="card-body" style="font-size: large;">
-                    <form method="POST" action="{{ url('user/change/username') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('user/change/password') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -19,7 +19,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Current password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Current password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -34,9 +34,9 @@
                             <label for="password-new" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-new" type="password" class="form-control @error('password') is-invalid @enderror" name="password_new" required autocomplete="new-password" placeholder="New password">
+                                <input id="password-new" type="password" class="form-control @error('password_new') is-invalid @enderror" name="password_new" required placeholder="New password">
 
-                                @error('password')
+                                @error('password_new')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -48,7 +48,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Repeat new password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Repeat new password">
                             </div>
                         </div>
 
