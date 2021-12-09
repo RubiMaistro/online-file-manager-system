@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\FileController::class, 'index'])->name('home');
+Route::get('/file/search', [App\Http\Controllers\FileController::class, 'search'])->middleware('auth')->name('home');
 
 Route::get('/file/add', [App\Http\Controllers\FileController::class, 'viewAddFileSurface'])->middleware('auth');
 Route::post('/file/add', [App\Http\Controllers\FileController::class, 'storeFile'])->middleware('auth');

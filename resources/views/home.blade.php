@@ -12,18 +12,15 @@
 <div class="container">
     <div class="column justify-content-center">
         <div class="row justify-content-center mb-4">
-            <div class="row">
+            <div class="row">    
                 <div class="mr-2">
-                    <label for="search-file"></label>
-                </div>
-                <div class="mr-2">
-                    <input id="search-file" type="text" class="form-control mr-2" name="search_file" placeholder="Write something here and search..." style="width: 300px;" required>
-                </div>
-                <div class="mr-2">
-                    <form method="post" action="{{ url('/file/search/') }}">
-                        @method('DELETE')
-                        @csrf
+                    <form class="row" method="GET" action="{{ url('/file/search') }}">
+                        <div class="mr-2">
+                            <input id="search-file" type="text" class="form-control mr-2" name="search" placeholder="Write something here and search..." style="width: 300px;" required>
+                        </div>
+                        <div class="mr-2">
                             <button class="btn btn-success" type="submit">Search</button>
+                        </div>
                     </form>
                 </div>  
                 <div class="column justify-content-center ml-4">
