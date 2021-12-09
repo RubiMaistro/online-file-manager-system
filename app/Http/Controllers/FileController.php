@@ -47,7 +47,7 @@ class FileController extends Controller
         ]);
 
         $userID = auth()->user()->id;
-        $files = Files::where('filename', 'like', "%{$request->search}%")->sortable()->paginate(20);
+        $files = Files::where('user_id', '=', $userID)->where('filename', 'like', "%{$request->search}%")->sortable()->paginate(20);
 
         return view('home', [
             'files' => $files
