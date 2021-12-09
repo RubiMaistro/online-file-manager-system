@@ -36,6 +36,25 @@ class FileController extends Controller
     }
 
     /**
+     * Show the saved files in list.
+     * 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required'
+        ]);
+
+        $userID = auth()->user()->id;
+        $files = Files::where('filename', 'like', "%{$request->search}%")->sortable()->paginate(20);
+
+        return view('home', [
+            'files' => $files
+        ]);
+    }
+
+    /**
      * Show the file adding surface.
      * 
      * @return \Illuminate\Contracts\Support\Renderable
