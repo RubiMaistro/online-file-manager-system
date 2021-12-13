@@ -1,10 +1,10 @@
 Online fájlkezelő alkalmazás
 =============================
 ### MAGYAR
-    - A projekt egy webes alkalmazás megvalósítása, amibe felhasználók tetszőleges fájlokat tölthetnek fel és le, továbbá szöveges fájlokat hozhatnak létre és szerkeszthetnek is.
+- A projekt egy webes alkalmazás megvalósítása, amibe felhasználók tetszőleges fájlokat tölthetnek fel és le, továbbá szöveges fájlokat hozhatnak létre és szerkeszthetnek is.
 
 ### ENGLISH
-    - It's a Web Application where you can upload, download, edit and delete files. You have an opportunity to send files to other users. Files are stored in local public storage. User and file information are stored in database.
+- It's a Web Application where you can upload, download, edit and delete files. You have an opportunity to send files to other users. Files are stored in local public storage. User and file information are stored in database.
 
 General Setup
 =============
