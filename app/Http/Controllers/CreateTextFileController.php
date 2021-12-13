@@ -31,7 +31,7 @@ class CreateTextFileController extends Controller
             'text' => 'required'
         ]);
 
-        $userName = auth()->user()->name;
+        $userName = auth()->user()->username;
         $filename = $request->name.'.txt';
         $destination_path = 'public/'. $userName.'/'.$filename;
 

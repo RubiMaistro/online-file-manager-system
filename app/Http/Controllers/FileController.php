@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
+use App\Models\User;
 
 class FileController extends Controller
 {
@@ -29,9 +30,11 @@ class FileController extends Controller
     {
         $userID = auth()->user()->id;
         $files = Files::where('user_id', '=', $userID)->sortable()->paginate(20);
+        $sender = User::all();
 
         return view('home', [
-            'files' => $files
+            'files' => $files,
+            'sender' => $sender
         ]);
     }
 
@@ -80,7 +83,7 @@ class FileController extends Controller
 
         if($request->hasFile('file'))
         {
-            $userName = auth()->user()->name;
+            $userName = auth()->user()->username;
             $destination_path = 'public/'. $userName;
 
             $file->user_id = auth()->user()->id;
@@ -107,7 +110,7 @@ class FileController extends Controller
         }
         $file->delete();
 
-        Storage::delete('public/'.auth()->user()->name.'/'.$file->filename);
+        Storage::delete('public/'.auth()->user()->username.'/'.$file->filename);
         session()->flash('message', 'Delete successful.');
 
         return redirect()->back();
