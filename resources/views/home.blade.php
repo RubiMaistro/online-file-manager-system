@@ -44,8 +44,9 @@
                     <th scope="col">@sortablelink('Name')</th>
                     <th scope="col">@sortablelink('Filename')</th>
                     <th scope="col">@sortablelink('Size')</th>
-                    <th scope="col">@sortablelink('Created')</th>
-                    <th scope="col">@sortablelink('Modified')</th>
+                    <th scope="col">Sender</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Modified</th>
                     <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -61,6 +62,16 @@
                         @else
                         {{ $file->size }}
                     @endif MB</td>
+                    <td>
+                    @foreach ($sender as $s)
+                        @if ($s->id == $file->sender_id)
+                            {{ $s->username }}
+                        @endif
+                    @endforeach
+                    @if ($file->sender_id == null)
+                        {{ 'Myself' }}
+                    @endif
+                    </td>
                     <td>{{ $file->created_at }}</td>
                     <td>{{ $file->updated_at }}</td>
                     <td class="row">
