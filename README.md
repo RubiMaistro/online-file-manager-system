@@ -11,7 +11,7 @@ General Setup
 
 - https://devmarketer.io/learn/setup-laravel-project-cloned-github-com/
 
-Sort Own Setup
+Short Own Setup
 ==============
 ### 1. Clone GitHub repo for this project locally
 ```
