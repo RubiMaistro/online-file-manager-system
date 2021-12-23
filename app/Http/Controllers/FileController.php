@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class FileController extends Controller
 {
@@ -29,7 +29,7 @@ class FileController extends Controller
     public function index()
     {
         $userID = auth()->user()->id;
-        $files = Files::where('user_id', '=', $userID)->sortable()->paginate(20);
+        $files = Files::where('user_id', '=', $userID)->sortable()->paginate(10);
         $sender = User::all();
 
         return view('home', [
@@ -50,10 +50,16 @@ class FileController extends Controller
         ]);
 
         $userID = auth()->user()->id;
-        $files = Files::where('user_id', '=', $userID)->where('filename', 'like', "%{$request->search}%")->sortable()->paginate(20);
+        $files = Files::where('filename', 'like', "%{$request->search}%")
+            ->where('user_id', '=', $userID)
+            ->sortable()->paginate(10);
+
+        $files->where('name', 'like', "%{$request->search}%");
+        $sender = User::all();
 
         return view('home', [
-            'files' => $files
+            'files' => $files,
+            'sender' => $sender
         ]);
     }
 
@@ -114,5 +120,22 @@ class FileController extends Controller
         session()->flash('message', 'Delete successful.');
 
         return redirect()->back();
+    }
+
+    public function downloadFile($id)
+    {
+        $file = Files::where('id', '=', $id)->get()->first();
+
+        $path = 'public/'.auth()->user()->username.'/'.$file->filename;
+        list($name, $extension) = explode('.', $file->filename);
+        //dd($extension);
+
+        $headers = array(
+            'Content-Type: application/'.$extension
+        );
+
+        //dd($headers);
+
+        return Storage::download($path, $file->filename);
     }
 }

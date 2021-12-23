@@ -8,6 +8,19 @@ use App\Models\Files;
 
 class CreateTextFileController extends Controller
 {
+
+    public $notEnteredErr = null;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Show the text file creating surface.
      * 
@@ -15,7 +28,9 @@ class CreateTextFileController extends Controller
      */
     public function viewCreateTextFileSurface()
     {
-        return view('files.createTextFile');
+        return view('files.createTextFile',[
+            'notEnteredErr' => $this->notEnteredErr
+        ]);
     }
 
     /**
@@ -26,25 +41,36 @@ class CreateTextFileController extends Controller
     public function createTextFile(Request $request) 
     {
 
-        $request->validate([
-            'name' => 'required',
-            'text' => 'required'
-        ]);
+        if($request->name != null)
+        {
+            $this->notEnteredErr = null;
+            if($request->text != null)
+            {
+                $this->notEnteredErr = null;
 
-        $userName = auth()->user()->username;
-        $filename = $request->name.'.txt';
-        $destination_path = 'public/'. $userName.'/'.$filename;
+                $userName = auth()->user()->username;
+                $filename = $request->name.'.txt';
+                $destination_path = 'public/'. $userName.'/'.$filename;
 
-        Storage::append($destination_path, $request->text);
+                Storage::append($destination_path, $request->text);
 
-        $file = new Files;
+                $file = new Files;
 
-        $file->user_id = auth()->user()->id;
-        $file->name = $request->name;
-        $file->filename = $filename;
-        $file->size = floatval(Storage::size($destination_path) / (1024*1024)); // size in MB
+                $file->user_id = auth()->user()->id;
+                $file->name = $request->name;
+                $file->filename = $filename;
+                $file->size = floatval(Storage::size($destination_path) / (1024*1024)); // size in MB
 
-        $file->save();
+                $file->save();
+
+            } else {
+                $this->notEnteredErr = "Enter something in the textfield!";
+                return $this->viewCreateTextFileSurface();
+            }
+        } else {
+            $this->notEnteredErr = "Enter your file name!";
+            return $this->viewCreateTextFileSurface();
+        }
 
         return redirect('/');
     }

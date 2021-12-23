@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Storage;
 class EditFileController extends Controller
 {
     /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Show the file modification surface.
      * 
      * @return \Illuminate\Contracts\Support\Renderable
@@ -17,7 +27,7 @@ class EditFileController extends Controller
     {
         $fileDB = Files::find($fileId);
 
-        $userName = auth()->user()->name;
+        $userName = auth()->user()->username;
         $filename = $fileDB->filename;
         $destination_path = 'public/'. $userName.'/'.$filename;
 
@@ -40,7 +50,7 @@ class EditFileController extends Controller
 
         $file = Files::find($fileId);
 
-        $userName = auth()->user()->name;
+        $userName = auth()->user()->username;
         $destination_path = 'public/'. $userName.'/'.$file->filename;
 
         Storage::delete($destination_path);
