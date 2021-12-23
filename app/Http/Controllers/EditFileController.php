@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Storage;
 class EditFileController extends Controller
 {
     /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Show the file modification surface.
      * 
      * @return \Illuminate\Contracts\Support\Renderable

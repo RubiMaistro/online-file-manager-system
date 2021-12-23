@@ -83,6 +83,7 @@ class SendFile extends Component
 
                             if(Storage::exists($to_path))
                             {
+                                unset($this->selectedFileId);
                                 $this->fileErr = 'The "'.$this->receiverUsername.'" user already has a "'.$sendFile->filename.'" file like this!';
                             } else {
 

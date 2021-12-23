@@ -23,7 +23,7 @@
 <body style="background-color:lemonchiffon">
     @livewireScripts
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="border-radius: 0 0 30px 30px; margin: auto; min-width: 40%; max-width: 60%">
             <div class="container" >
                 <a class="navbar-brand" href="{{ url('/') }}">
                     File Manager
@@ -42,6 +42,12 @@
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/file/add">Add file</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/file/create/text">Create Text</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/file/send">Send File</a>
                               </li>
                             </ul>
                         </div>

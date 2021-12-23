@@ -8,6 +8,17 @@ use App\Models\Files;
 
 class CreateTextFileController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Show the text file creating surface.
      * 

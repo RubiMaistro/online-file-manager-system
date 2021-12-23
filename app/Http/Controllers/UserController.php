@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Show the username modification surface.
      * 
      * @return \Illuminate\Contracts\Support\Renderable

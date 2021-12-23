@@ -16,23 +16,33 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+// HOMEPAGE 
 Route::get('/', [App\Http\Controllers\FileController::class, 'index'])->name('home');
-Route::get('/file/search', [App\Http\Controllers\FileController::class, 'search'])->middleware('auth')->name('home');
+Route::get('/file/search', [App\Http\Controllers\FileController::class, 'search'])->name('home');
 
-Route::get('/file/add', [App\Http\Controllers\FileController::class, 'viewAddFileSurface'])->middleware('auth');
-Route::post('/file/add', [App\Http\Controllers\FileController::class, 'storeFile'])->middleware('auth');
+// ADD FILE
+Route::get('/file/add', [App\Http\Controllers\FileController::class, 'viewAddFileSurface']);
+Route::post('/file/add', [App\Http\Controllers\FileController::class, 'storeFile']);
 
-Route::delete('/file/delete/{id}', [App\Http\Controllers\FileController::class, 'deleteFile'])->middleware('auth');
+// DELETE FILE
+Route::delete('/file/delete/{id}', [App\Http\Controllers\FileController::class, 'deleteFile']);
 
-Route::get('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'viewCreateTextFileSurface'])->middleware('auth');
-Route::post('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'createTextFile'])->middleware('auth');
+// DOWNLOAD FILE 
+Route::get('/file/download/{id}', [App\Http\Controllers\FileController::class, 'downloadFile']);
 
-Route::get('/file/send', [App\Http\Controllers\SendFileController::class, 'viewSendFileSurface'])->middleware('auth');
+// CREATE TEXT FILE
+Route::get('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'viewCreateTextFileSurface']);
+Route::post('/file/create/text', [App\Http\Controllers\CreateTextFileController::class, 'createTextFile']);
 
-Route::get('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'viewEditFileSurface'])->middleware('auth');
-Route::post('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'editFile'])->middleware('auth');
+// SEND FILE
+Route::get('/file/send', [App\Http\Controllers\SendFileController::class, 'viewSendFileSurface']);
 
-Route::get('user/change/username', [App\Http\Controllers\UserController::class, 'viewUsernameChangerSurface'])->middleware('auth');
-Route::get('user/change/password', [App\Http\Controllers\UserController::class, 'viewPasswordChangerSurface'])->middleware('auth');
-Route::post('user/change/username', [App\Http\Controllers\UserController::class, 'usernameChange'])->middleware('auth');
-Route::post('user/change/password', [App\Http\Controllers\UserController::class, 'passwordChange'])->middleware('auth');
+// EDIT FILE
+Route::get('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'viewEditFileSurface']);
+Route::post('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'editFile']);
+
+// USER CHANGERS
+Route::get('user/change/username', [App\Http\Controllers\UserController::class, 'viewUsernameChangerSurface']);
+Route::get('user/change/password', [App\Http\Controllers\UserController::class, 'viewPasswordChangerSurface']);
+Route::post('user/change/username', [App\Http\Controllers\UserController::class, 'usernameChange']);
+Route::post('user/change/password', [App\Http\Controllers\UserController::class, 'passwordChange']);

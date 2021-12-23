@@ -37,8 +37,11 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <table class="table table-light table-hover">
-                <thead>
+            @if ($files->count() == 0) 
+                <h1>No files to display.</h1> 
+            @else
+            <table class="table table-light table-hover" style="background-color:darkslategray; color:white; border-radius: 20px">
+                <thead style="font-size:20px; color:deepskyblue;">
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">@sortablelink('Name')</th>
@@ -47,16 +50,15 @@
                     <th scope="col">Sender</th>
                     <th scope="col">Created</th>
                     <th scope="col">Modified</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Actions</th>
                     </tr>
                 </thead>
 
-                @if($files->count())
                 @foreach( $files as $file )
                 <tbody>
-                    <th scope="row">{{ $id }}</th>
-                    <td>{{ $file->name }}</td>
-                    <td>{{ $file->filename }}</td>
+                    <th style="width: 3%">{{ $id }}</th>
+                    <td style="width: 10%">{{ $file->name }}</td>
+                    <td style="width: 15%">{{ $file->filename }}</td>
                     <td>@if ($file->size == 0)
                         < 0.01
                         @else
@@ -69,17 +71,18 @@
                         @endif
                     @endforeach
                     @if ($file->sender_id == null)
-                        {{ 'Myself' }}
+                        {{ 'Nobody' }}
                     @endif
                     </td>
                     <td>{{ $file->created_at }}</td>
                     <td>{{ $file->updated_at }}</td>
-                    <td class="row">
-                        <a href="/file/edit/{{ $file->id }}" class="btn btn-primary mr-2">Edit</a>
+                    <td class="row" >
+                        <a href="/file/edit/{{ $file->id }}" class="btn btn-primary mr-4">{{ __('Edit') }}</a>
+                        <a href="/file/download/{{ $file->id }}" class="btn btn-success mr-4">{{ __('Download') }}</a>
                         <form method="post" action="{{ url('/file/delete/'.$file->id) }}">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
-                            <button class="btn btn-danger" type="submit">Delete</button>
+                            <button class="btn btn-danger" type="submit">{{ __('Delete') }}</button>
                         </form>
                     </td>
                 </tbody>

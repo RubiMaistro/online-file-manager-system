@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
 use App\Models\User;
+use Illuminate\Http\Response;
 
 class FileController extends Controller
 {
@@ -114,5 +115,22 @@ class FileController extends Controller
         session()->flash('message', 'Delete successful.');
 
         return redirect()->back();
+    }
+
+    public function downloadFile($id)
+    {
+        $file = Files::where('id', '=', $id)->get()->first();
+
+        $path = 'public/'.auth()->user()->username.'/'.$file->filename;
+        list($name, $extension) = explode('.', $file->filename);
+        //dd($extension);
+
+        $headers = array(
+            'Content-Type: application/'.$extension
+        );
+
+        //dd($headers);
+
+        return Storage::download($path, $file->filename);
     }
 }

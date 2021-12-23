@@ -16,9 +16,9 @@
                             <input wire:model="receiverUsername" type="text" class="form-control" name="username" value="{{ old('name') }}" placeholder="Write here to whom you want to send a file(s)." required>
                         </div>
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <button wire:click="sendFile" type="button" class="btn btn-primary">
-                                    {{ __('Send') }}
+                            <div class="ml-4">
+                                <button wire:click="sendFile" type="button" class="btn btn-dark">
+                                    {{ __('Send File') }}
                                 </button>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="m-2 pl-4">
-                                <button wire:click="addFile" style="margin-top: 45px"> Add </button>
+                                <button type="button" class="btn btn-dark" wire:click="addFile" style="margin-top: 45px"> {{ __('Add File') }} </button>
                             </div>
                             <div class="column">
                                 <div class="m-2 pl-4">
@@ -55,7 +55,7 @@
                                     @if($selectedFiles != null)
                                         @foreach ($selectedFiles as $selectedFile)
                                             @foreach ($selectedFile as $data)
-                                            <div class="row ml-2 mb-2" style="background-color: skyblue; padding: 0.3em; width: fit-content; font-size: 14px; border-radius: 10px">
+                                            <div class="row ml-2 mb-2 p-2" style="background-color:steelblue; padding: 0.3em; width: fit-content; font-size: 14px; border-radius: 10px">
                                                 <div value="{{ $data['id'] }}">{{ $data['filename'] }}</div>
                                                 <button wire:click="deleteFromSelected({{ $data['id'] }})" style="background-color: red; color: white; margin-left: 0.4em; border-radius: 50%; border-color:red">X</button>
                                             </div>
