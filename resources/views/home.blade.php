@@ -22,6 +22,11 @@
                             <button class="btn btn-success" type="submit">Search</button>
                         </div>
                     </form>
+                    <form class="row justify-content-end mt-2" method="GET" action="{{ url('/') }}">
+                        <div class="mr-2">
+                            <button class="btn btn-success" type="submit">Get All</button>
+                        </div>
+                    </form>
                 </div>  
                 <div class="column justify-content-center ml-4">
                     <div class="mb-2">

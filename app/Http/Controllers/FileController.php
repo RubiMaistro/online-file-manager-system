@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
 use App\Models\User;
-use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class FileController extends Controller
 {
@@ -51,10 +50,16 @@ class FileController extends Controller
         ]);
 
         $userID = auth()->user()->id;
-        $files = Files::where('user_id', '=', $userID)->where('filename', 'like', "%{$request->search}%")->sortable()->paginate(20);
+        $files = Files::where('filename', 'like', "%{$request->search}%")
+            ->where('user_id', '=', $userID)
+            ->sortable()->paginate(20);
+
+        $files->where('filename', 'like', "%{$request->search}%");
+        $sender = User::all();
 
         return view('home', [
-            'files' => $files
+            'files' => $files,
+            'sender' => $sender
         ]);
     }
 
