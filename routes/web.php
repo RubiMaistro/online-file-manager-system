@@ -42,7 +42,7 @@ Route::get('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, '
 Route::post('/file/edit/{id}', [App\Http\Controllers\EditFileController::class, 'editFile']);
 
 // USER CHANGERS
-Route::get('user/change/username', [App\Http\Controllers\UserController::class, 'viewUsernameChangerSurface']);
-Route::get('user/change/password', [App\Http\Controllers\UserController::class, 'viewPasswordChangerSurface']);
-Route::post('user/change/username', [App\Http\Controllers\UserController::class, 'usernameChange']);
-Route::post('user/change/password', [App\Http\Controllers\UserController::class, 'passwordChange']);
+Route::get('/user/change/username', [App\Http\Controllers\UserController::class, 'viewUsernameChangerSurface']);
+Route::get('/user/change/password', [App\Http\Controllers\UserController::class, 'viewPasswordChangerSurface']);
+Route::post('/user/change/username', [App\Http\Controllers\UserController::class, 'usernameChange']);
+Route::post('/user/change/password', [App\Http\Controllers\UserController::class, 'passwordChange']);

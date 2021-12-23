@@ -1,7 +1,7 @@
 @if (!$success)
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background-color:lightblue">
+            <div class="card" style="background-color:lightblue; font-weight:bold">
                 <div class="card-header" style="font-size: x-large; text-align: center">{{ __('Send File Manager') }}</div>
                 <div class="card-body" style="font-size: large;">
                     <div>
@@ -52,10 +52,12 @@
                                     <label>Selected</label>
                                 </div>
                                 <div class="m-2 pl-4">
-                                    @if($selectedFiles != null)
+                                    @if($selectedFiles == null)
+                                        <h4>No file selected</h4>
+                                    @else
                                         @foreach ($selectedFiles as $selectedFile)
                                             @foreach ($selectedFile as $data)
-                                            <div class="row ml-2 mb-2 p-2" style="background-color:steelblue; padding: 0.3em; width: fit-content; font-size: 14px; border-radius: 10px">
+                                            <div class="row ml-2 mb-2 p-2" style="background-color:steelblue; color:white; padding: 0.3em; width: fit-content; font-size: 14px; border-radius: 10px">
                                                 <div value="{{ $data['id'] }}">{{ $data['filename'] }}</div>
                                                 <button wire:click="deleteFromSelected({{ $data['id'] }})" style="background-color: red; color: white; margin-left: 0.4em; border-radius: 50%; border-color:red">X</button>
                                             </div>

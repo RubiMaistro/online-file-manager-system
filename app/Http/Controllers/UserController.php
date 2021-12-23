@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public $error = null;
+
     /**
     * Create a new controller instance.
     *
@@ -54,17 +57,26 @@ class UserController extends Controller
 
         if(Hash::check($request->password, $user->password))
         {
-            $user->name = $request->name;
-            $user->save();
-        } 
-        else
-        {
-            return view('user.change.username',[
-                'error' => 'Password incorrect.'
-            ]);
-        }
+            $userName = auth()->user()->username;
+            if(Storage::exists('public/'.$request->name))
+            {
+                $this->error = "The ". $request->name ." username already exist!";
 
-        return redirect('/');
+            } else {
+                $this->error = null;
+
+                Storage::move('public/'.$userName, 'public/'.$request->name);
+                $user->username = $request->name;
+                $user->save();
+
+                return redirect('/');
+            }
+        } 
+        
+        return view('user.change.username',[
+            'error' => $this->error
+        ]);
+        
     }
 
     public function passwordChange(Request $request)

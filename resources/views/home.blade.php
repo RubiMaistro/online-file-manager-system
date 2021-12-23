@@ -10,8 +10,8 @@
 <div style="opacity: 0;">{{ $id = 1 }}</div>
 
 <div class="container">
-    <div class="column justify-content-center">
-        <div class="row justify-content-center mb-4">
+    <div class="row mb-4">
+        <div class="row justify-content-center" style="margin: auto">
             <div class="row">    
                 <div class="mr-2">
                     <form class="row" method="GET" action="{{ url('/file/search') }}">
@@ -41,11 +41,21 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            @if ($files->count() == 0) 
-                <h1>No files to display.</h1> 
-            @else
-            <table class="table table-light table-hover" style="background-color:darkslategray; color:white; border-radius: 20px">
+        <div class="column justify-content-center">
+            <div style="width:fit-content; background-color:darkslategray; color:white; padding: 1em 2em 2em 3em; margin-bottom:1em; border-radius: 40% 10px 40% 70%;">
+                <h4>You can upload, download, edit and delete files.</h4>
+            </div>
+            <div style="width:fit-content; background-color:darkslategray; color:white; padding: 1em 2em 2em 3em; margin: auto; border-radius: 40% 10px 40% 70%;">
+                <h4>You have an opportunity to send files to other users.</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        @if ($files->count() == 0) 
+            <h1>No files to display.</h1> 
+        @else
+            <table class="table table-light table-hover" style="background-color:darkslategray; color:white; border-radius: 20px; margin-bottom: 168px">
                 <thead style="font-size:20px; color:deepskyblue;">
                     <tr>
                     <th scope="col">#</th>
@@ -60,7 +70,7 @@
                 </thead>
 
                 @foreach( $files as $file )
-                <tbody>
+                <tbody> 
                     <th style="width: 3%">{{ $id }}</th>
                     <td style="width: 10%">{{ $file->name }}</td>
                     <td style="width: 15%">{{ $file->filename }}</td>
@@ -82,6 +92,11 @@
                     <td>{{ $file->created_at }}</td>
                     <td>{{ $file->updated_at }}</td>
                     <td class="row" >
+                        @foreach ($sender as $s)
+                            @if ($s->id == $file->user_id)
+                        <a href="storage/{{ $s->username.'/'.$file->filename }}" class="btn btn-light mr-4">{{ __('Open') }}</a>
+                            @endif
+                        @endforeach
                         <a href="/file/edit/{{ $file->id }}" class="btn btn-primary mr-4">{{ __('Edit') }}</a>
                         <a href="/file/download/{{ $file->id }}" class="btn btn-success mr-4">{{ __('Download') }}</a>
                         <form method="post" action="{{ url('/file/delete/'.$file->id) }}">
@@ -95,10 +110,9 @@
                 @endforeach
                 @endif
             </table>
-            <div class="row justify-content-center">
+        <div class="row justify-content-center">
             {!! $files->appends(\Request::except('page'))->render() !!}
-            </div>
-        <div>
-    </div>
+        </div>
+    <div>
 </div>
 @endsection

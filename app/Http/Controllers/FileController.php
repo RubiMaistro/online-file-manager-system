@@ -29,7 +29,7 @@ class FileController extends Controller
     public function index()
     {
         $userID = auth()->user()->id;
-        $files = Files::where('user_id', '=', $userID)->sortable()->paginate(20);
+        $files = Files::where('user_id', '=', $userID)->sortable()->paginate(10);
         $sender = User::all();
 
         return view('home', [
@@ -52,9 +52,9 @@ class FileController extends Controller
         $userID = auth()->user()->id;
         $files = Files::where('filename', 'like', "%{$request->search}%")
             ->where('user_id', '=', $userID)
-            ->sortable()->paginate(20);
+            ->sortable()->paginate(10);
 
-        $files->where('filename', 'like', "%{$request->search}%");
+        $files->where('name', 'like', "%{$request->search}%");
         $sender = User::all();
 
         return view('home', [
