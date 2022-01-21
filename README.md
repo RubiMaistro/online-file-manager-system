@@ -6,6 +6,11 @@ Online fájlkezelő alkalmazás
 ### ENGLISH
 - It's a Web Application where you can upload, download, edit and delete files. You have an opportunity to send files to other users. Files are stored in local public storage. User and file information are stored in database.
 
+Overview
+=========
+- Web application url: http://online-files.herokuapp.com/login
+- Video: https://youtu.be/0P5nhhbhks8
+
 General Setup
 =============
 
